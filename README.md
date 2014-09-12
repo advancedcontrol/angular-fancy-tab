@@ -3,6 +3,8 @@
 
 ![screen shot of demo](https://cloud.githubusercontent.com/assets/368013/4249495/9aa07134-3a77-11e4-9ab1-c7544c8a3ad3.png)
 
+Make it look as fancy as you wish, styling is up to you.
+
 
 ## Installation
 
