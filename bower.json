@@ -1,0 +1,9 @@
+{
+  "name": "angular-fancy-tab",
+  "main": ["fancy-tab.js"],
+  "description": "Simple AngularJS progress bar directive",
+  "dependencies": {
+    "angular": "1.x"
+  },
+  "devDependencies": {}
+}

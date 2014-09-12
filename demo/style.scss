@@ -1,0 +1,33 @@
+
+@import "../fancy-tab.scss";
+@include fancy-tabs();
+
+tabs {
+    display: inline-block;
+
+    // This is the tab
+    nav > div {
+        display: inline-block;
+
+        &> span {
+            margin-top: 1em;
+            padding: 0.5em;
+            border: 1px solid blue;
+        }
+
+        &.active > span {
+            display: block;
+
+            margin-top: 0;
+            padding-top: 1.5em;
+
+            background-color: #ccc;
+            color: white;
+        }
+    }
+
+    // This is the content
+    pane {
+        border: 1px solid red;
+    }
+}

@@ -1,0 +1,29 @@
+@import "compass";
+
+@mixin fancy-tabs() {
+
+    // NOTE:: It is up to the implementor to define the
+    //  location of the tabs etc. This really only implements
+    //  the bare basics
+    tabs {
+        display: block;
+
+        &> div {
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            &> nav {
+                display: block;
+            }
+
+            &> div.tab-content > pane {
+                display: none;
+
+                &.active {
+                    display: block;
+                }
+            }
+        }
+    }
+}
