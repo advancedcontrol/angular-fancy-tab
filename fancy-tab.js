@@ -17,11 +17,14 @@
                 restrict: 'E',
                 transclude: true,
                 scope: {
-                    current: '=?'
+                    current: '=?',
+                    autoSelect: '=?'
                 },
                 controller: ['$scope', '$element', function($scope, $element) {
                     var panes = $scope.panes = [],
                         selected;
+
+                    $scope.autoSelect = $scope.autoSelect === undefined ? true : $scope.autoSelect;
 
                     $scope.select = function(pane) {
                         selected = pane;
@@ -33,7 +36,8 @@
                     }
 
                     this.addPane = function(pane) {
-                        if (panes.length == 0)
+                        if (panes.length == 0 && $scope.autoSelect || 
+                            (pane.name || pane.title) === $scope.current)
                             $scope.select(pane);
 
                         panes.push(pane);
@@ -41,7 +45,7 @@
 
                     // Allow for programmatic tab selection
                     $scope.$watch('current', function (val) {
-                        if (val !== (selected.name || selected.title)) {
+                        if (val && (selected === undefined || val !== (selected.name || selected.title))) {
                             angular.forEach(panes, function(pane) {
                                 if (val === (selected.name || selected.title)) {
                                     pane.selected = true;
