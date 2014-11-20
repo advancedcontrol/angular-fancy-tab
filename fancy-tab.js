@@ -33,7 +33,7 @@
                         });
                         pane.selected = true;
                         $scope.current = selected.name || selected.title;
-                    }
+                    };
 
                     this.addPane = function(pane) {
                         if (panes.length == 0 && $scope.autoSelect || 
@@ -41,7 +41,14 @@
                             $scope.select(pane);
 
                         panes.push(pane);
-                    }
+                    };
+
+                    this.removePane = function(pane) {
+                        var index = panes.indexOf(pane);
+                        if (index !== -1) {
+                            panes.splice(index, 1);
+                        }
+                    };
 
                     // Allow for programmatic tab selection
                     $scope.$watch('current', function (val) {
@@ -92,6 +99,10 @@
                         } else {
                             element.removeClass('active');
                         }
+                    });
+
+                    scope.$on('$destroy', function () {
+                        tabsCtrl.removePane(scope);
                     });
                 },
                 template:
