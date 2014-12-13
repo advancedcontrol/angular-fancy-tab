@@ -50,6 +50,18 @@
                         }
                     };
 
+                    this.deselect = function (pane) {
+                        var index = panes.indexOf(pane),
+                            i;
+                        
+                        for (i = 0; i < panes.length; i += 1) {
+                            if (i !== index && !panes[i].hide) {
+                                $scope.select(panes[i]);
+                                break;
+                            }
+                        }
+                    };
+
                     // Allow for programmatic tab selection
                     $scope.$watch('current', function (val) {
                         if (val && (selected === undefined || val !== (selected.name || selected.title))) {
@@ -101,12 +113,18 @@
                         }
                     });
 
+                    scope.$watch('hide', function (hidden) {
+                        if (scope.selected && hidden) {
+                            tabsCtrl.deselect(scope);
+                        }
+                    });
+
                     scope.$on('$destroy', function () {
                         tabsCtrl.removePane(scope);
                     });
                 },
                 template:
-                    '<div ng-if="selected" ng-transclude></div>'
+                    '<div ng-if="selected && !hide" ng-transclude></div>'
             };
         });
 
