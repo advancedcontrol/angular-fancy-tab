@@ -66,7 +66,7 @@
                     $scope.$watch('current', function (val) {
                         if (val && (selected === undefined || val !== (selected.name || selected.title))) {
                             angular.forEach(panes, function(pane) {
-                                if (val === (selected.name || selected.title)) {
+                                if (val === (pane.name || pane.title)) {
                                     pane.selected = true;
                                 } else {
                                     pane.selected = false;
