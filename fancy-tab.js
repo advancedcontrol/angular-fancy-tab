@@ -18,7 +18,8 @@
                 transclude: true,
                 scope: {
                     current: '=?',
-                    autoSelect: '=?'
+                    autoSelect: '=?',
+                    type: '@'
                 },
                 controller: ['$scope', '$element', function($scope, $element) {
                     var panes = $scope.panes = [],
@@ -33,6 +34,12 @@
                         });
                         pane.selected = true;
                         $scope.current = selected.name || selected.title;
+                    };
+
+                    $scope.touched = function (type, pane) {
+                        if ($scope.type && $scope.type === type || type === ($scope.type || 'click')) {
+                            $scope.select(pane);
+                        }
                     };
 
                     this.addPane = function(pane) {
@@ -78,7 +85,7 @@
                 template:
                     '<div>' +
                         '<nav>' +
-                            '<div ng-repeat="pane in panes" ng-if="!pane.hide" ng-class="{active: pane.selected}" ng-click="select(pane)">' +
+                            '<div ng-repeat="pane in panes" ng-if="!pane.hide" ng-class="{active: pane.selected}" ng-click="touched(' + "'click'" + ', pane)" ng-touch="touched(' + "'touch'" + ', pane)">' +
                                 '<div class="{{pane.icon}}"></div>' +
                                 '<span>{{pane.title}}</span>' +
                             '</div>' +
