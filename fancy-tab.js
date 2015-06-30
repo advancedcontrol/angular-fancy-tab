@@ -28,12 +28,12 @@
                     $scope.autoSelect = $scope.autoSelect === undefined ? true : $scope.autoSelect;
 
                     $scope.select = function(pane) {
-                        selected = pane;
-                        angular.forEach(panes, function(pane) {
-                            pane.selected = false;
+                        selected = pane.name || pane.title;
+                        angular.forEach(panes, function(onePane) {
+                            onePane.selected = false;
                         });
                         pane.selected = true;
-                        $scope.current = selected.name || selected.title;
+                        $scope.current = selected;
                     };
 
                     $scope.touched = function (type, pane) {
@@ -71,7 +71,8 @@
 
                     // Allow for programmatic tab selection
                     $scope.$watch('current', function (val) {
-                        if (val && (selected === undefined || val !== (selected.name || selected.title))) {
+                        if (val && (selected === undefined || val !== selected)) {
+                            selected = val;
                             angular.forEach(panes, function(pane) {
                                 if (val === (pane.name || pane.title)) {
                                     pane.selected = true;
