@@ -88,7 +88,7 @@
                         '<nav>' +
                             '<div ng-repeat="pane in panes" ng-if="!pane.hide" ng-class="{active: pane.selected}" ng-click="touched(' + "'click'" + ', pane)" ng-touch="touched(' + "'touch'" + ', pane)">' +
                                 '<div class="{{pane.icon}}"></div>' +
-                                '<span>{{pane.title}}</span>' +
+                                '<span ng-bind-html="pane.title"></span>' +
                             '</div>' +
                         '</nav>' +
                         '<div class="tab-content" ng-transclude></div>' +
