@@ -102,7 +102,7 @@
                 restrict: 'E',
                 transclude: true,
                 scope: {
-                    title: '@',
+                    title: '@text',
                     icon: '@',
                     selected: '=?',
                     name: '=?',
